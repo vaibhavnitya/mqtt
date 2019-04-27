@@ -1,5 +1,7 @@
 // application constants
-const mqttBroker = 'mqtt://broker.hivemq.com'
+// Brokers - https://shiftr.io/try
+// mqtt://broker.hivemq.com
+const mqttBroker = 'https://shiftr.io/try'
 const publishTopic = 'hasaccess'
 const subscribeTopic = 'userdata'
 
