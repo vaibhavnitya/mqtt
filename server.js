@@ -48,17 +48,25 @@ const userData = [{
 const checkIfUserHasAccess = (userRfid) => {
     const rfidDetail = userRfid.split('-')
     const user = userData.filter(({rfid}) => (rfid == rfidDetail[1]))[0]
+    const readerCode = rfidDetail[0] && rfidDetail[0].split('reader')[1]
 
     if (user) {
         console.log('User:', user)
         if (user.reader === rfidDetail[0] && user.hasAccess) {
-            return 'yes'
+            return {
+                reader: readerCode,
+                hasAccess: 'yes'
+            }
+
         }
     } else {
         console.log('Could not identify card. Card not registered.')
     }
 
-    return 'no'
+    return {
+        reader: readerCode,
+        hasAccess: 'no'
+    }
 }
 
 /** 
@@ -67,7 +75,7 @@ const checkIfUserHasAccess = (userRfid) => {
  * @param access: String
 */
 const sendAccessInformation = (access) => {
-    client.publish(publishTopic, access)
+    client.publish(`${publishTopic}${access.reader}`, access.hasAccess)
     console.log(`Successfully published '${access}' to ${publishTopic}`)
 }
 
