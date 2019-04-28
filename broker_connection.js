@@ -2,7 +2,7 @@
 // connecting to cloud mqtt broker to exchange messages
 
 var mqtt = require('mqtt')
-var client  = mqtt.connect('mqtt://broker.hivemq.com')
+var client  = mqtt.connect('https://shiftr.io/try')
  
 client.on('connect', function () {
   client.subscribe('presence', function (err) {

@@ -10,12 +10,12 @@
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
 
 // Application constants
-const char ssid[] = "Xiaomi_F345";            // Wifi id
-const char pass[] = "SriKrishna123$$";        // Wifi password
-const char mqtt_broker_ip[] = "35.205.227.69" // MQTT broker IP
-const char subsciber_topic = "hasaccess"      // subscribe to topic
-const char publisher_topic = "userdata"       // publish to topic
-const char reader_name = "reader1"            // provide a reader name to identify the reader. This name should be synced with registered users in server.
+const char ssid[] = "Xiaomi_F345";              // Wifi id
+const char pass[] = "SriKrishna123$$";          // Wifi password
+const char mqtt_broker_ip[] = "35.205.227.69";  // MQTT broker IP
+const char subsciber_topic[] = "hasaccess";     // subscribe to topic
+const char publisher_topic[] = "userdata";      // publish to topic
+const char reader_name[] = "reader1";           // provide a reader name to identify the reader. This name should be synced with registered users in server.
 
 WiFiClient net;
 MQTTClient client;
@@ -87,7 +87,7 @@ void loop() {
 
   if (mfrc522.uid.uidByte[0]) {
    String rfidUid= String(mfrc522.uid.uidByte[0]) + String(mfrc522.uid.uidByte[1]) + String(mfrc522.uid.uidByte[2]) + String(mfrc522.uid.uidByte[3]);
-   String readerWithRfid = reader_name + "-" + rfidUid
+   String readerWithRfid = reader_name + String("-") + rfidUid
    Serial.println(readerWithRfid);
    client.publish(publisher_topic, readerWithRfid);
   }
