@@ -76,7 +76,7 @@ const checkIfUserHasAccess = (userRfid) => {
 */
 const sendAccessInformation = (access) => {
     client.publish(`${publishTopic}${access.reader}`, access.hasAccess)
-    console.log(`Successfully published '${access}' to ${publishTopic}`)
+    console.log(`Successfully published ${access.hasAccess} to '${publishTopic}${access.reader}'`)
 }
 
 client.on('connect', function (message) {
