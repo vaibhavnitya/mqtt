@@ -3,7 +3,8 @@
 // mqtt://broker.hivemq.com
 const mqttBroker = 'https://shiftr.io/try'
 const publishTopic = 'hasaccess'
-const subscribeTopic = 'userdata'
+const subscribeTopic1 = 'userdata1'
+const subscribeTopic2 = 'userdata2'
 
 // imports and initialization
 const mqtt = require('mqtt')
@@ -80,9 +81,17 @@ const sendAccessInformation = (access) => {
 }
 
 client.on('connect', function (message) {
-    client.subscribe(subscribeTopic, function (err) {
+    client.subscribe(subscribeTopic1, function (err) {
         if (!err) {
-          console.log(`Successfully subscribed to topic : ${subscribeTopic}`)
+          console.log(`Successfully subscribed to topic : ${subscribeTopic1}`)
+        }
+    })
+})
+
+client.on('connect', function (message) {
+    client.subscribe(subscribeTopic2, function (err) {
+        if (!err) {
+          console.log(`Successfully subscribed to topic : ${subscribeTopic2}`)
         }
     })
 })
